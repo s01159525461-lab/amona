@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>amona ❤️</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 1. شاشة الظرف المغلق -->
+  <div id="envelope-screen" class="screen active">
+    <div class="envelope" onclick="openEnvelope()">
+      <div class="envelope-title">A letter for</div>
+      <div class="recipient-name">amona ❤️</div>
+      <div class="heart-seal">❤️</div>
+    </div>
+    <p class="instruction">💌 دوسي على الظرف 💌</p>
+  </div>
+
+  <!-- 2. شاشة البطاقة المفتوحة -->
+  <div id="card-screen" class="screen">
+    <div class="card">
+      <div class="card-heart">❤️</div>
+      <p class="card-text">مش عارف رد فعلك |</p>
+      <button class="btn-primary" onclick="goToPasswordScreen()">الدخول للموقع 🎀</button>
+    </div>
+  </div>
+
+  <!-- 3. شاشة كلمة السر -->
+  <div id="password-screen" class="screen">
+    <div class="password-box">
+      <h3 class="sub-title">ENTER THE SECRET WORD</h3>
+      <input type="password" id="secretInput" placeholder="اكتبي كلمة السر..." />
+      <button class="btn-primary" onclick="checkPassword()">افتحي الهدية 💕</button>
+    </div>
+  </div>
+
+  <!-- 4. الصفحة الرئيسية للمحتوى -->
+  <div id="main-content" class="screen">
+    <div class="container">
+      
+      <!-- الهيدر -->
+      <h1 class="font-script">amonaaaaaa</h1>
+      <h2 class="names-header">samir ❤️ amona</h2>
+      <p class="sub-text">المكان بتاعنا إحنا الاثنين بس ❤️</p>
+
+      <!-- عداد الأيام -->
+      <div class="card-box">
+        <div class="box-title">بدايتنا 💕</div>
+        <div class="timer-grid">
+          <div class="time-card">
+            <span id="days">0</span>
+            <label>يوم</label>
+          </div>
+          <div class="time-card">
+            <span id="hours">0</span>
+            <label>ساعة</label>
+          </div>
+          <div class="time-card">
+            <span id="minutes">0</span>
+            <label>دقيقة</label>
+          </div>
+          <div class="time-card">
+            <span id="seconds">0</span>
+            <label>ثانية</label>
+          </div>
+        </div>
+        <p class="card-footer-text">كل يوم بيعدي و هفضل احبك اكتر</p>
+      </div>
+
+      <!-- محطات قصتنا -->
+      <div class="card-box">
+        <div class="box-title">🗓️ محطات قصتنا</div>
+        <div class="sub-card">
+          <span>بداية حكايتنا ❤️</span>
+          <div class="date-badge">2025-10-05 🗓️</div>
+        </div>
+      </div>
+
+      <!-- قسم السؤال عن الجواز 💍 -->
+      <div class="card-box proposal-box">
+        <div class="box-title">💍 سؤال العمر</div>
+        <p class="proposal-text">تتجوزيني؟ 💍❤️</p>
+        <div class="proposal-buttons">
+          <button class="btn-primary btn-yes" onclick="sendAnswer('موافقة 💍')">موافقة 💍</button>
+          <button class="btn-primary btn-no" onclick="sendAnswer('مش موافقة')">لا 😅</button>
+        </div>
+        <p id="response-status" class="status-msg"></p>
+      </div>
+
+      <!-- الرسائل -->
+      <div class="card-box">
+        <div class="box-title">❤️ message ❤️</div>
+<!--         
+        <div class="message-item">
+          <span class="sender">samir</span>
+          <!-- <p>كل لحظة معاكي بتفرق معايا</p> -->
+        <!-- </div> --> 
+
+        <div class="message-item">
+          <span class="sender">samir</span>
+          <p>مهما عدي الوقت عمري ما هبطل احبك ❤️❤️</p>
+        </div>
+
+        <div class="message-item">
+          <span class="sender">samir</span>
+          <p>حبيت اعملك المفاجأة دي عشان كل اللحظات الحلوة ما بينا تبقي هنا 😂❤️</p>
+        </div>
+
+        <div class="message-item">
+          <span class="sender">samir</span>
+          <p>بحبك جدااا ❤️❤️❤️</p>
+        </div>
+      </div>
+
+      <!-- مشغل الأغنية -->
+      <!-- <div class="audio-player-card">
+        <button class="play-btn" onclick="toggleAudio()">▶</button>
+        <div class="audio-info">
+          <span>أغنيتنا ❤</span>
+          <small>أغنيتنا</small>
+        </div>
+        <audio id="bg-music" src="song.mp3"></audio>
+      </div> -->
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

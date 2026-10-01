@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+  background-color: #f7ebe6;
+  color: #5a4038;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  padding-bottom: 80px; /* مسافة لمشغل الصوت في الأسفل */
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* الظرف */
+.envelope {
+  background-color: #d8b79c;
+  width: 280px;
+  height: 170px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.envelope:hover {
+  transform: scale(1.02);
+}
+
+.envelope-title {
+  font-size: 14px;
+  color: #8c6e63;
+}
+
+.recipient-name {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5a4038;
+  margin: 5px 0;
+}
+
+.heart-seal {
+  background: #e5989b;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.instruction {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #8c6e63;
+}
+
+/* الكروت والأزرار */
+.card, .password-box, .card-box {
+  background: #fffdfa;
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  margin-bottom: 15px;
+}
+
+.card-text {
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.btn-primary {
+  background-color: #e5b3ad;
+  color: #5a4038;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #d89f98;
+}
+
+/* قسم السؤال */
+.proposal-box {
+  border: 2px dashed #e5b3ad;
+}
+
+.proposal-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.proposal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-yes {
+  background-color: #e5b3ad;
+}
+
+.btn-no {
+  background-color: #e2d3ce;
+  color: #777;
+}
+
+.status-msg {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8c6e63;
+}
+
+/* النصوص والهيدر */
+.font-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  color: #8c6e63;
+}
+
+.names-header {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.sub-text {
+  font-size: 14px;
+  color: #a0857b;
+  margin-bottom: 20px;
+}
+
+/* شبكة الوقت */
+.timer-grid {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  gap: 8px;
+}
+
+.time-card {
+  background: #fdf2ee;
+  border-radius: 12px;
+  padding: 10px 5px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-card span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #5a4038;
+}
+
+.time-card label {
+  font-size: 12px;
+  color: #a0857b;
+}
+
+.card-footer-text {
+  font-size: 13px;
+  color: #a0857b;
+}
+
+/* الرسائل */
+.sub-card {
+  background: #fdf2ee;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.date-badge {
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.message-item {
+  background: #fdf2ee;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.message-item .sender {
+  font-size: 11px;
+  color: #a0857b;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.message-item p {
+  font-size: 14px;
+}
+
+/* مشغل الصوت */
+.audio-player-card {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 380px;
+  background: #fffdfa;
+  border-radius: 30px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+.play-btn {
+  background: #d8b79c;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.audio-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.audio-info span {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.audio-info small {
+  font-size: 11px;
+  color: #a0857b;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #d8b79c;
+  margin: 15px 0;
+  text-align: center;
+  outline: none;
+  font-size: 16px;
+}
