@@ -1,31 +1,50 @@
-// تغيير الشاشات
-function showScreen(screenId) {
+// 1. استيراد مكتبات Firebase من الـ CDN لتوسيع الموديول بسهولة
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+// 2. إعدادات Firebase الخاصة بك
+const firebaseConfig = {
+  apiKey: "AIzaSyAqxN5QUVNdzuochcnzf3mWT6Pr-mqqrys",
+  authDomain: "amona1.firebaseapp.com",
+  projectId: "amona1",
+  storageBucket: "amona1.firebasestorage.app",
+  messagingSenderId: "967793604359",
+  appId: "1:967793604359:web:caa999dae10142c22377a2",
+  measurementId: "G-RGX5T7N2J2",
+  databaseURL: "https://amona1-default-rtdb.firebaseio.com" // رابط قاعدة البيانات الخاص بمشروعك
+};
+
+// 3. تهيئة الفايربيز وقاعدة البيانات
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// 4. جعل الدوال متاحة على مستوى Window لاستدعائها من HTML
+window.showScreen = function(screenId) {
   document.querySelectorAll('.screen').forEach(screen => {
     screen.classList.remove('active');
   });
   document.getElementById(screenId).classList.add('active');
-}
+};
 
-function openEnvelope() {
-  showScreen('card-screen');
-}
+window.openEnvelope = function() {
+  window.showScreen('card-screen');
+};
 
-function goToPasswordScreen() {
-  showScreen('password-screen');
-}
+window.goToPasswordScreen = function() {
+  window.showScreen('password-screen');
+};
 
-function checkPassword() {
+window.checkPassword = function() {
   const secret = document.getElementById('secretInput').value;
-  // كلمة السر الافتراضية
   if (secret === "amona" || secret === "") {
-    showScreen('main-content');
+    window.showScreen('main-content');
     startTimer();
   } else {
     alert("كلمة السر غير صحيحة ❤️");
   }
-}
+};
 
-// العداد الزمني (تاريخ بداية القصة)
+// 5. العداد الزمني (تاريخ البداية)
 const startDate = new Date('2026-01-05T00:00:00');
 
 function startTimer() {
@@ -45,8 +64,8 @@ function startTimer() {
   }, 1000);
 }
 
-// تشغيل الصوت
-function toggleAudio() {
+// 6. تشغيل/إيقاف الأغنية
+window.toggleAudio = function() {
   const audio = document.getElementById('bg-music');
   const btn = document.querySelector('.play-btn');
   if (audio.paused) {
@@ -56,38 +75,26 @@ function toggleAudio() {
     audio.pause();
     btn.innerText = "▶";
   }
-}
+};
 
-// إرسال الإجابة للسيرفر (الباك إند)
-async function sendAnswer(userAnswer) {
+// 7. دالة إرسال الإجابة وحفظها في Firebase Realtime Database
+window.sendAnswer = async function(userAnswer) {
   const statusElement = document.getElementById('response-status');
   statusElement.innerText = "جاري إرسال الإجابة...";
 
-  // استبدل الرابط برابط السيرفر المستضيف (مثلاً على Vercel أو الرابط المحلي أثناء التجربة)
-  const API_URL = 'http://localhost:5000/api/answer';
-
   try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: 'Shahd',
-        answer: userAnswer,
-        timestamp: new Date().toLocaleString('ar-EG')
-      })
+    const answersRef = ref(database, 'answers');
+    const newAnswerRef = push(answersRef);
+    
+    await set(newAnswerRef, {
+      name: 'Amona',
+      answer: userAnswer,
+      timestamp: new Date().toLocaleString('ar-EG')
     });
 
-    const data = await response.json();
-
-    if (data.success) {
-      statusElement.innerText = "تم إرسال إجابتك بنجاح! ❤️";
-    } else {
-      statusElement.innerText = "حدث خطأ، حاولي مرة أخرى.";
-    }
+    statusElement.innerText = "تم إرسال إجابتك بنجاح! ❤️";
   } catch (error) {
-    console.error('Error:', error);
-    statusElement.innerText = "تم حفظ إجابتك ❤️";
+    console.error('Firebase Error:', error);
+    statusElement.innerText = "حدث خطأ أثناء الإرسال.";
   }
-}
+};

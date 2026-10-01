@@ -16,7 +16,7 @@ body {
 
 .container {
   width: 100%;
-  padding-bottom: 80px; /* مسافة لمشغل الصوت في الأسفل */
+  padding-bottom: 80px;
 }
 
 .screen {
